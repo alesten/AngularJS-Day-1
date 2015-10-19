@@ -16,16 +16,16 @@
                 <thead>
                     <tr>
                         <td>Id</td>
-                        <td>Year</td>
-                        <td>Registered</td>
-                        <td>Make</td>
-                        <td>Model</td>
-                        <td>Description</td>
-                        <td>Price</td>
+                        <td><a href ng-click="ctrl.order('year')">Year</a></td>
+                        <td><a href ng-click="ctrl.order('registered')">Registered</a></td>
+                        <td><a href ng-click="ctrl.order('make')">Make</a></td>
+                        <td><a href ng-click="ctrl.order('model')">Model</a></td>
+                        <td><a href ng-click="ctrl.order('description')">Description</a></td>
+                        <td><a href ng-click="ctrl.order('price')">Price</a></td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="car in ctrl.cars | filter:searchText">
+                    <tr ng-repeat="car in ctrl.cars| filter:searchText | orderBy:ctrl.predicate:ctrl.orderReverse">
                         <td>{{$index + 1}}</td>
                         <td>{{car.year}}</td>
                         <td>{{car.registered| date}}</td>
@@ -43,17 +43,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script>
-                                var myApp = angular.module('DemoApp', []);
-                                myApp.controller('CarController', [function () {
-                                var self = this;
-                                        self.cars = [
-                                        {year: 1997, registered: 867621600000, make: 'Ford', model: 'E350', description: 'ac, abs, moon', price: 3000}
-                                        , {year: 1999, registered: 945212400000, make: 'Chevy', model: 'Venture', description: 'None', price: 4900}
-                                        , {year: 2000, registered: 953766000000, make: 'Chevy', model: 'Venture', description: '', price: 5000}
-                                        , {year: 1996, registered: 844380000000, make: 'Jeep', model: 'Grand Cherokee', description: 'Air, moon roof, loaded', price: 4799}
-                                        ];
-                                        self.title = "Cars Demo App";
-                                        self.predicate = 'make';
-                                }]);        </script>
+            var myApp = angular.module('DemoApp', []);
+            
+            myApp.controller('CarController', [function () {
+                var self = this;
+                self.cars = [
+                    {year: 1997, registered: 867621600000, make: 'Ford', model: 'E350', description: 'ac, abs, moon', price: 3000}
+                    ,{year: 1999, registered: 945212400000, make: 'Chevy', model: 'Venture', description: 'None', price: 4900}
+                    ,{year: 2000, registered: 953766000000, make: 'Chevy', model: 'Venture', description: '', price: 5000}
+                    ,{year: 1996, registered: 844380000000, make: 'Jeep', model: 'Grand Cherokee', description: 'Air, moon roof, loaded', price: 4799}
+                ];
+                self.title = "Cars Demo App";
+                self.predicate = 'make';
+                self.predicate = 'year';
+                self.orderReverse = true;
+                self.order = function(predicate){
+                    self.orderReverse = (self.predicate === predicate) ? !self.orderReverse : false;
+                    self.predicate = predicate;
+                };
+            }]);                                                                
+        </script>
     </body>
 </html>
