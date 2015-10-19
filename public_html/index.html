@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>Title</h1>
+        <!-- Add your Content here -->
+        <script>
+            var myApp = angular.module('DemoApp', []);
+
+            myApp.controller('CarController', [function () {
+                    var self = this;
+                    self.cars = [
+                        {year: 1997, registered: 867621600000, make: 'Ford', model: 'E350', description: 'ac, abs, moon', price: 3000}
+                        , {year: 1999, registered: 945212400000, make: 'Chevy', model: 'Venture', description: 'None', price: 4900}
+                        , {year: 2000, registered: 953766000000, make: 'Chevy', model: 'Venture', description: '', price: 5000}
+                        , {year: 1996, registered: 844380000000, make: 'Jeep', model: 'Grand Cherokee', description: 'Air, moon roof, loaded', price: 4799}
+                    ];
+                    self.title = "Cars Demo App";
+                    self.predicate = 'make';
+                }]);
+        </script>
+    </body>
+</html>
